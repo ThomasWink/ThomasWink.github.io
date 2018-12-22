@@ -38,7 +38,7 @@ var zoomview = false;
 
 
 function init() {
-    posLandingPage = [0, 18, 0];
+    posLandingPage = [0, 18, 3];
     posOverview = [10, 3, 10];
     raycaster = new THREE.Raycaster();
     scene = new THREE.Scene();

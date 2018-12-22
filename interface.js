@@ -144,7 +144,7 @@ function LandingToOverview(clickedButton, divID, divID2) {
     overview = true;
     for (var y = 0; y < objects.length; y++)
         OpArray[y] = objects[y].material.opacity;
-    var params = [posOverview[0], posOverview[1], posOverview[2], 2000];
+    var params = [posOverview[0], posOverview[1], posOverview[2], 6000];
     //cameraPan(posOverview[0], posOverview[1], posOverview[2], 4000);
     cameraPan(params);
     OpArray = [];
