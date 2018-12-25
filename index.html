@@ -117,15 +117,6 @@
             <div id="content">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. </div>
            </div>-->
       </div>
-<!--
-      <div data-spy="affix" id="dot-nav">
-        <ul>
-          <li class="awesome-tooltip active" title="Home"><a href="#home"></a></li>
-          <li class="awesome-tooltip" title="About"><a href="#about"></a></li>
-          <li class="awesome-tooltip" title="Projects"><a href="#projects"></a></li>
-          <li class="awesome-tooltip" title="Contact"><a href="#contact"></a></li>
-        </ul>onmouseover="hoverSide(1, true)" onmouseout = "hoverSide(1, false)"
-    </div>-->
     <div id="hoverbuttons" class="hidden">
       <div id="HelpButton" class="hidden">
           <input type= "image" id="helpimage" src= "images/EXPLAIN-GALILEO.png" onclick="ToggleHelp('helptext')"/>
@@ -147,10 +138,6 @@
         <li onmouseover = "hoverSide(12, true)" onmouseout = "hoverSide(12, false)" onclick="goToComp(12)" id="Comp12" class="awesome-tooltip" title = "Scan platform"><a></a></li>
         <li onmouseover = "hoverSide(13, true)" onmouseout = "hoverSide(13, false)" onclick="goToComp(13)" id="Comp13" class="awesome-tooltip" title = "Probe Relay Antenna"><a></a></li>
         <li onmouseover = "hoverSide(14, true)" onmouseout = "hoverSide(14, false)" onclick="goToComp(14)" id="Comp14" class="awesome-tooltip" title = "Sun shields"><a></a></li>
-        <!--<li onmouseover = "hoverSide(15, true)" onmouseout = "hoverSide(15, false)" onclick="goToComp(15)" id="Comp15" class="awesome-tooltip" title = ""><a></a></li>-->
-        <!--<li onmouseover = "hoverSide(16, true)" onmouseout = "hoverSide(16, false)" onclick="goToComp(16)" id="Comp16" class="awesome-tooltip" title = "Radioisotope thermoelectric Generators 2"><a></a></li>-->
-        <!--<li onmouseover = "hoverSide(17, true)" onmouseout = "hoverSide(17, false)" onclick="goToComp(17)" id="Comp17" class="awesome-tooltip" title = ""><a></a></li>-->
-        <!--<li onmouseover = "hoverSide(18, true)" onmouseout = "hoverSide(18, false)" onclick="goToComp(18)" id="Comp18" class="awesome-tooltip" title = " 2"><a></a></li>-->
         </ul>
       </div>
     </div>
@@ -158,7 +145,7 @@
     <div id="overview-button" class="hidden">
       <input type="image" id="closeimage" src="images/Close-Icon.png" onmouseover = "hoverOverviewButton(true, this)" onmouseout = "hoverOverviewButton(false, this)" onclick = "goToOverview()"/>
     </div>
-
+<!-- if you leave room for the overview button you can put images here like in the car example TODO-->
     <div id="helptext" onclick="ToggleHelp('helptext')" >
       <input type="image" id="closeimage_help" src="images/Close-Icon.png"  onmouseover="this.src='images/Close-Icon-Word.png'" onmouseout="this.src='images/Close-Icon.png'"/>
       <div id="text">
