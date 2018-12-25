@@ -1,14 +1,3 @@
-//TODO
-//-add support for zoomview (onclick callback functions)
-//-fix camera bug
-//-add support for all animations
-// ???
-
-
-
-//Starting image
-
-
 if ( WEBGL.isWebGLAvailable() === false ) {
 
   document.body.appendChild( WEBGL.getWebGLErrorMessage() );
@@ -294,9 +283,6 @@ function componentClicked(object){
         }
     }
 
-    //TODO
-    //give every component its own animation location
-
     var params = [20, 20, 0, 2000];
     switch (selectedComponent.name) {
         case "Low-gain_antenna":
@@ -324,7 +310,7 @@ function componentClicked(object){
             params[1] = 8;
             params[2] = -2;
             break;
-        case "Plasma-wave_antenna": //TODO focus setting on component
+        case "Plasma-wave_antenna":
             params[0] = 7.3;
             params[1] = 9.5;
             params[2] = 8.5;
@@ -416,10 +402,7 @@ function onDocumentMouseDown(event) {
     var intersects = raycaster.intersectObjects(objects);
 
     if (intersects.length > 0) {
-        //intersects[0].object.callback();
         componentClicked(intersects[0].object);
-        //TODO go to zoomview
-        //TODO make suitable callback function
     }
 
 }
@@ -525,14 +508,8 @@ function onDocumentMouseMove(event) {
                 $('[id="'+y+'"]').tooltip('hide');
                 if(div != null && selectedComponent != objects[c])
                     div.classList.remove("specialhover");
-                //$('[id="'+y+'"]').tooltip('toggle');
             }
         }
-        //TODO also set sidenav to "hover"
-        //for(var i; i < objects.length; i++){
-            //intersects[i].object.material.transparent = true;
-            //intersects[i].object.material.opacity = 0;
-        //}
     }
     else if(mousehovering){}
     else {
@@ -604,7 +581,6 @@ function loadAnimation(modelname, z){
   gltf.scene.traverse( function ( child ) {
     //if ( child.isMesh ) {
       newScene.add( gltf.scene );
-      //scene.add( gltf.scene ); TODO
       gltfStore.animations =  gltf.animations;
       gltfStore.ship = gltf.scene.children[2];
       gltfStore.cam =  gltf.cameras[0];

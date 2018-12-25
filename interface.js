@@ -1,23 +1,3 @@
-//TODO
-//-add support for zoomview
-//-buttons on rightside
-//-make everything look nice
-// ???
-
-//NEEDED
-// all buttons in png form
-// all backgroundimages in the right form
-// all animations (in mp4)
-
-
-//temp
-function wait(ms){
-  var start = new Date().getTime();
-  var end = start;
-  while(end < start + ms) {
-    end = new Date().getTime();
- }
-}
 var paused = 1;
 var help = false;
 
@@ -82,9 +62,6 @@ function goToOverview(){
         document.getElementById("zoomviewtext").style.display = "block";
         for(var k = 1; k< 15; k++)
             document.getElementById("text" + k).style.display = "none";
-
-        //TODO
-        //give every component its own animation location
         var params = [posOverview[0], posOverview[1], posOverview[2], 2000]
         cameraPan(params);
         OpArray = [];

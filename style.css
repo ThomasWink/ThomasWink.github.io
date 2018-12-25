@@ -156,8 +156,8 @@ html, body {
 #mySidenav li {
 	background-color: #333;
 	border-radius: 50%;
-  height: 5px;
-  width: 5px;
+  height: 10px;
+  width: 10px;
 	margin: 20px auto 0px auto;
   display: block;
   box-sizing: border-box;
@@ -214,6 +214,7 @@ b.none { /*not implemented yet TODO */
 }
 
 #zoomviewtext, #text0, #text1, #text2, #text3, #text4, #text5, #text6, #text7, #text8, #text9, #text10, #text11, #text12, #text13, #text14, #text15, #text16, #text17, #text18{
+  pointer-events: none;
   display: none;
   position: absolute;
   height: 100%;
