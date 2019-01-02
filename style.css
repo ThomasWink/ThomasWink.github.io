@@ -129,11 +129,21 @@ html, body {
   -ms-transform: translate(-50%,-50%);
 }
 
+#overview-button {
+  display: none;
+  position: absolute;
+  top: 90%;
+  left: 0px;
+  width: 10%;
+  height: 10%;
+  z-index: 500;
+}
+
 #simple-icons {
   display: none;
   position: absolute;
   bottom: 0px;
-  left: 0px;
+  left: 80px;
   width: 250px;
   height: 80px;
   z-index: 500;
@@ -239,17 +249,17 @@ b.none { /*not implemented yet TODO */
 }
 
 #closeimage{
-  display: none;
-  position: relative;
+  display: block;
+  position: absolute;
   height: 50px;
-  left: 200px;
-  bottom: 80px;
+  left: 30px;
+  bottom: 30px;
 }
 
 
 /*make close icon appear at the same position*/
 #closeimage_help{
-  left: 42.5px; 
+  left: 30px; 
 }
 
 #zoomviewtext, #text0, #text1, #text2, #text3, #text4, #text5, #text6, #text7, #text8, #text9, #text10, #text11, #text12, #text13, #text14, #text15, #text16, #text17, #text18{

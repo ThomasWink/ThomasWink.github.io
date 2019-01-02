@@ -79,12 +79,12 @@ function goToOverview(){
 
 function setOverviewButton(trueorfalse){
     if(trueorfalse) {
-        var item = document.getElementById("closeimage");
+        var item = document.getElementById("overview-button");
         item.style.display = "block";
         item.className = "unhidden";
     }
     else{
-        var item = document.getElementById("closeimage");
+        var item = document.getElementById("overview-button");
         item.style.display = "none";
         item.className = "hidden";
     }
