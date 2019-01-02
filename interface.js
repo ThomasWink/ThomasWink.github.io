@@ -203,13 +203,11 @@ function hoverSide(id, over) {
             div.classList.add("specialhover");
     }
     else {
-        if(overview && id !=0){
-            mousehovering = false;
-            var div = document.getElementById(y);
-            $('[id="'+y+'"]').tooltip('hide');
-            if(div != null && selectedComponent != objects[id])
-                div.classList.remove("specialhover");
-        }
+        mousehovering = false;
+        var div = document.getElementById(y);
+        $('[id="'+y+'"]').tooltip('hide');
+        if(div != null && selectedComponent != objects[id])
+            div.classList.remove("specialhover");
     }
     if (overview || (id==0 && over)){
         y ="Overview";
