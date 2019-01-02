@@ -176,9 +176,9 @@ html, body {
 #mySidenav li {
 	background-color: #333;
 	border-radius: 50%;
-  height: 10px;
-  width: 10px;
-	margin: 10px auto 10px auto;
+  height: 5px;
+  width: 5px;
+	margin: 15px auto 15px auto;
   display: block;
   box-sizing: border-box;
   cursor: pointer;
