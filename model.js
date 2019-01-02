@@ -177,9 +177,21 @@ function cameraPan(params) {
         .onStart(function(){
             if (overview){
                 controls.maxDistance = 25;
+                for(var x = 0; x<objects.length; x++){
+                    objects[x].material.opacity = 0.5;
+                }
             }
             else
                 controls.minDistance = 5;
+                for(var x = 0; x<objects.length; x++){
+                    if(objects[x] == selectedComponent){
+                        objects[x].material.transparent = false;
+                        objects[x].material.opacity = 1;
+                    }
+                    else{
+                        objects[x].material.opacity = 0.2;
+                    }
+                }
             setAnimation(true);
         })
         .onUpdate(function () {
@@ -205,15 +217,6 @@ function cameraPan(params) {
                 zoomview = true;
                 controls.minDistance = 5;
                 controls.maxDistance = 15;
-                for(var x = 0; x<objects.length; x++){
-                    if(objects[x] == selectedComponent){
-                        objects[x].material.transparent = false;
-                        objects[x].material.opacity = 1;
-                    }
-                    else{
-                        objects[x].material.opacity = 0.2;
-                    }
-                }
             }
             else{
                 var div = document.getElementById('Overview');
@@ -224,9 +227,6 @@ function cameraPan(params) {
                 //div.className = 'hoverofcomponent';
                 controls.minDistance = 10;
                 controls.maxDistance = 25;
-                for(var x = 0; x<objects.length; x++){
-                    objects[x].material.opacity = 0.5;
-                }
                 document.getElementById("zoomviewtext").style.display = "block";
                 document.getElementById("text0").style.display = "block";
             }
