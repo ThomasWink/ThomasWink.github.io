@@ -207,6 +207,9 @@ function cameraPan(params) {
             tooltiptinit();
             var item =document.getElementById("HelpButton")
             item.className = 'unhidden';
+            var item =document.getElementById("simple-icons")
+            item.className = 'unhidden';
+            item.style.display = "block";
             if(!overview) {
                 camera.lookAt(new THREE.Vector3(selectedComponent.position));
                 var div = document.getElementById('Overview');

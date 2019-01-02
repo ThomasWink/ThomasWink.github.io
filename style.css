@@ -129,13 +129,13 @@ html, body {
   -ms-transform: translate(-50%,-50%);
 }
 
-#overview-button {
+#simple-icons {
   display: none;
   position: absolute;
-  top: 90%;
-  left: 1%;
-  width: 10%;
-  height: 10%;
+  bottom: 0px;
+  left: 0px;
+  width: 250px;
+  height: 80px;
   z-index: 500;
 }
 
@@ -151,6 +151,26 @@ html, body {
 #mySidenav, #mySidenav ul{    
 	z-index: 2;
 	margin: 155px 0px 0px 0px;
+}
+
+#mySecNav{
+  z-index: 3;
+	margin: -300px auto 0px 0px;
+  width: 45%;
+}
+
+#mySecNav li {
+	border-radius: 50%;
+  height: 15px;
+  margin: 5px 0px 5px 0px;
+  width: 100%;
+  display: block;
+  box-sizing: border-box;
+  cursor: pointer;
+  -webkit-transition: -webkit-transform 0.1s ease;
+  -moz-transition: -moz-transform 0.1s ease;
+  transition: transform 0.1s ease;
+
 }
 
 #mySidenav li {
@@ -186,6 +206,11 @@ html, body {
 	position: absolute;
 }
 
+.tooltip {
+  pointer-events: none;
+  z-index: 1;
+}
+
 .tooltip-inner {
   position: relative;
   font-size: 16px;
@@ -200,11 +225,25 @@ b.none { /*not implemented yet TODO */
   right: 0; /* On mouse-over, make the elements appear as they should */
 }
 
-#closeimage, #closeimage_help{
+#closeimage_help{
   position: absolute;
   height: 50px;
   left: 30px;
   bottom: 30px;
+}
+
+#helpimage1, #helpimage2 {
+  position: relative; 
+  height: 50px;
+  margin: auto 0px 30px 30px;
+}
+
+#closeimage{
+  display: none;
+  position: relative;
+  height: 50px;
+  left: 200px;
+  bottom: 80px;
 }
 
 
@@ -223,30 +262,3 @@ b.none { /*not implemented yet TODO */
   left: 20px;
   font-size: 16px;
 }
-
-/*
-.UI_Landing{
-    overflow: hidden;
-
-}
-.UI_Overview{
-
-}
-.UI_Zoom{
-
-}*/
-/*.canvas-container{
-    position: relative;
-    width: 500px;
-    height: 500px;
-  }*/
-  /*#c {
-    width: 500px;
-    height: 500px; 
-    style: border 1px solid black;
-  }*/
-  /*#button {
-    position: absolute;
-    left: 30%;
-    top: 40%;
-  };*/

@@ -79,12 +79,12 @@ function goToOverview(){
 
 function setOverviewButton(trueorfalse){
     if(trueorfalse) {
-        var item = document.getElementById("overview-button");
+        var item = document.getElementById("closeimage");
         item.style.display = "block";
         item.className = "unhidden";
     }
     else{
-        var item = document.getElementById("overview-button");
+        var item = document.getElementById("closeimage");
         item.style.display = "none";
         item.className = "hidden";
     }
@@ -182,17 +182,46 @@ function ToggleHelp(divID) {
 }
 
 function hoverSide(id, over) {
+    var y;
+    if(id != 0)
+        y = 'Comp' + id;
+    else
+        y = 'Overview';
     if (over){
         mousehovering = true;
         var object;
-        for (var k = 0; k< scene.children.length; k++){
-            if(scene.children[k].type == "Scene")
-                object = scene.children[k].children[id];
+        if (id != 0){
+            for (var k = 0; k< scene.children.length; k++){
+                if(scene.children[k].type == "Scene")
+                    object = scene.children[k].children[id];
+            }
+            mouseHover(object, true);
         }
-        mouseHover(object, true);
+        var div = document.getElementById(y);
+        $('[id="'+y+'"]').tooltip('show');
+        if(selectedComponent != objects[id])
+            div.classList.add("specialhover");
     }
     else {
         mousehovering = false;
+        var div = document.getElementById(y);
+        $('[id="'+y+'"]').tooltip('hide');
+        if(div != null && selectedComponent != objects[id])
+            div.classList.remove("specialhover");
+    }
+    if (overview || (id==0 && over)){
+        y ="Overview";
+        var div = document.getElementById(y);
+        $('[id="'+y+'"]').tooltip('show');
+        if(selectedComponent != objects[id])
+            div.classList.add("specialhover");
+    }
+    else{
+        y = "Overview";
+        var div = document.getElementById(y);
+        $('[id="'+y+'"]').tooltip('hide');
+        if(selectedComponent != objects[id])
+            div.classList.remove("specialhover");
     }
 }
 
