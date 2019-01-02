@@ -190,9 +190,22 @@ function hoverSide(id, over) {
                 object = scene.children[k].children[id];
         }
         mouseHover(object, true);
+        var y = 'Comp' + id;
+        var div = document.getElementById(y);
+        $('[id="'+y+'"]').tooltip('show');
+        if(selectedComponent != objects[id])
+            div.classList.add("specialhover");
     }
     else {
-        mousehovering = false;
+        console.log("false");
+        if(id != -1){
+            mousehovering = false;
+            var y = 'Comp' + id;
+            var div = document.getElementById(y);
+            $('[id="'+y+'"]').tooltip('hide');
+            if(div != null && selectedComponent != objects[id])
+                div.classList.remove("specialhover");
+        }
     }
 }
 

@@ -153,6 +153,26 @@ html, body {
 	margin: 155px 0px 0px 0px;
 }
 
+#mySecNav{
+  z-index: 3;
+	margin: -300px auto 0px 0px;
+  width: 45%;
+}
+
+#mySecNav li {
+	border-radius: 50%;
+  height: 15px;
+  margin: 5px 0px 5px 0px;
+  width: 100%;
+  display: block;
+  box-sizing: border-box;
+  cursor: pointer;
+  -webkit-transition: -webkit-transform 0.1s ease;
+  -moz-transition: -moz-transform 0.1s ease;
+  transition: transform 0.1s ease;
+
+}
+
 #mySidenav li {
 	background-color: #333;
 	border-radius: 50%;
@@ -184,6 +204,11 @@ html, body {
 	vertical-align: top;
 	margin: 0px 0px 0px 25px;
 	position: absolute;
+}
+
+.tooltip {
+  pointer-events: none;
+  z-index: 1;
 }
 
 .tooltip-inner {
@@ -223,30 +248,3 @@ b.none { /*not implemented yet TODO */
   left: 20px;
   font-size: 16px;
 }
-
-/*
-.UI_Landing{
-    overflow: hidden;
-
-}
-.UI_Overview{
-
-}
-.UI_Zoom{
-
-}*/
-/*.canvas-container{
-    position: relative;
-    width: 500px;
-    height: 500px;
-  }*/
-  /*#c {
-    width: 500px;
-    height: 500px; 
-    style: border 1px solid black;
-  }*/
-  /*#button {
-    position: absolute;
-    left: 30%;
-    top: 40%;
-  };*/
