@@ -129,13 +129,13 @@ html, body {
   -ms-transform: translate(-50%,-50%);
 }
 
-#overview-button {
+#simple-icons {
   display: none;
   position: absolute;
-  top: 90%;
-  left: 1%;
-  width: 10%;
-  height: 10%;
+  bottom: 0px;
+  left: 0px;
+  width: 250px;
+  height: 80px;
   z-index: 500;
 }
 
@@ -225,11 +225,25 @@ b.none { /*not implemented yet TODO */
   right: 0; /* On mouse-over, make the elements appear as they should */
 }
 
-#closeimage, #closeimage_help{
+#closeimage_help{
   position: absolute;
   height: 50px;
   left: 30px;
   bottom: 30px;
+}
+
+#helpimage1, #helpimage2 {
+  position: relative; 
+  height: 50px;
+  margin: auto 0px 30px 30px;
+}
+
+#closeimage{
+  display: none;
+  position: relative;
+  height: 50px;
+  left: 200px;
+  bottom: 80px;
 }
 
 

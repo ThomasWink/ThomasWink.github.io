@@ -161,9 +161,11 @@
       </div>
     </div>
 
-    <div id="overview-button" class="hidden">
-      <input type="image" id="closeimage" src="images/Close-Icon.png" onmouseover = "hoverOverviewButton(true, this)" onmouseout = "hoverOverviewButton(false, this)" onclick = "goToOverview()"/>
-    </div>
+    <div id="simple-icons" class="hidden">
+        <image id="helpimage1" src="images/Close-Icon.png"></image>
+        <image id="helpimage2" src="images/Close-Icon.png"></image>
+        <image id="closeimage" src="images/Close-Icon.png" onmouseover = "hoverOverviewButton(true, this)" onmouseout = "hoverOverviewButton(false, this)" onclick = "goToOverview()"></image>
+      </div>
 <!-- if you leave room for the overview button you can put images here like in the car example TODO-->
     <div id="helptext" onclick="ToggleHelp('helptext')" >
       <input type="image" id="closeimage_help" src="images/Close-Icon.png"  onmouseover="this.src='images/Close-Icon-Word.png'" onmouseout="this.src='images/Close-Icon.png'"/>
