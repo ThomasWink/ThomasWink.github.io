@@ -1,186 +1,183 @@
 <!DOCTYPE html>
 
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="description" content="Galileo Sattelite" />
-    <meta name="author" content="SitePoint" />
+    <head>
+        <meta charset="utf-8" />
+        <meta name="description" content="Galileo Sattelite" />
+        <meta name="author" content="SitePoint" />
 
-    <title> NASA's Satellite GALILEO </title>
-    
-    <script src="libs/jquery.js"></script>
-    <script src="libs/three.js"></script>
-    <script src="libs/tween.js"></script>
-    <script src="libs/OrbitControls.js"></script>
-    <script src="libs/WebGL.js"></script>
-    <script src="libs/quaternion.js"></script>
-    <script src="loaders/OBJLoader.js"></script>
-    <script src="loaders/GLTFLoader.js"></script>
-    <link href="libs/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <script src="libs/bootstrap.bundle.min.js"></script>
+        <title> NASA's Satellite GALILEO </title>
+        
+        <script src="libs/jquery.js"></script>
+        <script src="libs/three.js"></script>
+        <script src="libs/tween.js"></script>
+        <script src="libs/OrbitControls.js"></script>
+        <script src="libs/WebGL.js"></script>
+        <script src="loaders/OBJLoader.js"></script>
+        <script src="loaders/GLTFLoader.js"></script>
+        <link href="libs/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <script src="libs/bootstrap.bundle.min.js"></script>
+        <link rel="stylesheet" href="style.css" />
+    </head>
 
-    <link rel="stylesheet" href="style.css" />
-  </head>
+    <body>
+        <!--This is for the landing page-->
+        <!--the startbutton-->
+        <div id="startbutton" class="unhidden">
+            <input type="image" id="startimage" src="images/Play-Icon.png" onclick="LandingToOverview(this, 'startbutton', 'starttext1')" onmouseover="this.src='images/Play-Icon-Word.png'" onmouseout="this.src='images/Play-Icon.png'"/>
+        </div>
+        <!--the text--><!--"#CUSTOMIZATION"-->
+        <div id="starttext1" class="unhidden">
+            <div class="animText">Welcome to the NASA's GALILEO experience</div>
+            <div class="animText">Press the play button to spin up the model. Scroll to zoom and click and drag to rotate the model</div>
+        </div>
 
-  <body>
-    <div id="startbutton" class="unhidden">
-        <input type="image" id="startimage" src="images/Play-Icon.png" onclick="LandingToOverview(this, 'startbutton', 'starttext1')" onmouseover="this.src='images/Play-Icon-Word.png'" onmouseout="this.src='images/Play-Icon.png'"/>
-      </div>
-    <div id="starttext1" class="unhidden">
-      <div class="animText">Welcome to the NASA's GALILEO experience</div>
-      <div class="animText">Press the play button to spin up the model. Scroll to zoom and click and drag to rotate the model</div>
-    </div>
-
-      <div id="zoomviewtext">
-        <div id="text0">
-            <h3>The Galileo Satellite</h3></br>
-           <div id="content">Like the famed astronomer for which it was named, Galileo studied the planet Jupiter and its moons, as well as several other Solar System bodies in finer detail than was ever possible before. To accomplish this, the Galileo orbiter carried several science instruments.</br>
-            Galileo’s mission ended on Sept. 21, 2003, when the spacecraft was intentionally commanded to plunge into Jupiter’s atmosphere, where it was destroyed. However, to this day scientists continue to study the data it collected during its 14-year mission.
-             </div>
-          </div>
-          <div id="text1">
-              <h3>Low-gain Antenna</h3></br>
-             <div id="content">The low-gain antennas mounted on the spinning section supported communications and provided the spacecraft's link to Earth. During the orbit, the collected data were sent to 100 scientists from United States, Great Britain, Germany, France, Canada and Sweden.</div>
+        <!--This is for the zoomviewtext explaining every component & and the overviewtext--><!--"#CUSTOMIZATION"-->
+        <div id="zoomviewtext">
+            <div id="text0">
+                <h3>The Galileo Satellite</h3></br>
+                <div id="content">Like the famed astronomer for which it was named, Galileo studied the planet Jupiter and its moons, as well as several other Solar System bodies in finer detail than was ever possible before. To accomplish this, the Galileo orbiter carried several science instruments.</br>
+                Galileo’s mission ended on Sept. 21, 2003, when the spacecraft was intentionally commanded to plunge into Jupiter’s atmosphere, where it was destroyed. However, to this day scientists continue to study the data it collected during its 14-year mission.
+                </div>
             </div>
-         <div id="text2">
-           <h3>Descent Probe</h3></br>
-          <div id="content">The descent probe had a mass of 339 kilograms and about 127 centimeters in diameter, and included a deceleration module to slow and protect the descent module.
-          </br></br>
-            Inside the heat shield, the scientific instruments were protected from ferocious heat (during entry) and pressure on its high-speed journey at 170590,464 km per hour. These were devices to measure temperature, pressure and deceleration, atmospheric composition, clouds, particles, and light and radio emissions from lightning and energetic particles in Jupiter's radiation belts.
+            <div id="text1">
+                <h3>Low-gain Antenna</h3></br>
+                <div id="content">The low-gain antennas mounted on the spinning section supported communications and provided the spacecraft's link to Earth. During the orbit, the collected data were sent to 100 scientists from United States, Great Britain, Germany, France, Canada and Sweden.</div>
+            </div>
+            <div id="text2">
+                  <h3>Descent Probe</h3></br>
+                  <div id="content">The descent probe had a mass of 339 kilograms and about 127 centimeters in diameter, and included a deceleration module to slow and protect the descent module.
+                  </br></br>
+                    Inside the heat shield, the scientific instruments were protected from ferocious heat (during entry) and pressure on its high-speed journey at 170590,464 km per hour. These were devices to measure temperature, pressure and deceleration, atmospheric composition, clouds, particles, and light and radio emissions from lightning and energetic particles in Jupiter's radiation belts.
+              </div>
+            </div>
+            <div id="text3">
+                <h3>Fuselage</h3></br>
+                <div id="content">The orbiter featured an innovative "dual-spin" design. Most spacecraft are stabilized in flight either by spinning around a major axis, or by maintaining a fixed orientation in space, referenced to the Sun and another star. As the first dual-spin planetary spacecraft, Galileo combined these techniques. </br></br>
+                    A spinning section rotated at about 3 rpm (=revolutions per minute), and a "despun" section was counter-rotated to provide a fixed orientation for cameras and other remote sensors. 
+                    The power supply, propulsion module and most of the computers and control electronics were mounted on the spinning section. 
+                </div>
+            </div>
+            <div id="text4">
+                <h3>Energetic-particle detector</h3></br>
+                <div id="content">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</div>
+            </div>
+            <div id="text5">
+                <h3>Magnetometer Sensors</h3></br>
+                <div id="content">The spinning section carried instruments to study magnetic fields and charged particles. These instruments included magnetometer sensors mounted on a 36-foot (11-meter) boom to minimize interference from the spacecraft's electronics.</div>
+            </div>
+            <div id="text6">
+                <h3>Plasma-wave detector</h3></br>
+                <div id="content">The plasma-wave detector studied electromagnetic waves generated by the particles.</div>
+            </div>
+            <div id="text7">
+                <h3>Extreme Ultraviolet Spectrometer</h3></br>
+                <div id="content">The extreme ultraviolet detector, associated with the ultraviolet spectrometer, studied gases.</div>
+            </div>
+            <div id="text8">
+                <h3>Radioisotope thermoelectric Generators</h3></br>
+                <div id="content">Electrical power was provided by two radioisotope thermoelectric generators. Heat produced by natural radioactive decay of plutonium was converted to electricity (570 watts at launch, 485 at the end of the mission) to operate the orbiter spacecraft's equipment.</div>
+            </div>
+            <div id="text9">
+                <h3>Thrusters</h3></br>
+                <div id="content">The spacecraft's propulsion module consisted of 12 2.25-pound-force (10-newton) thrusters and a single 90-pound-force (400-newton) engine which used monomethylhydrazine fuel and nitrogen-tetroxide oxidizer.</div>
+            </div>
+            <div id="text10">
+                <h3>Dust Counter</h3></br>
+                <div id="content">The dust counter counted particles of dust in space, usually when they had an impact on the instrument. More precisely, the job of this instrument was to examine dust in the Jovian system to see where it comes from, where it goes, and what happens to it in between.</div>
+            </div>
+            <div id="text11">
+                <h3>Star Scanner</h3></br>
+                <div id="content">The star scanner, a small optical telescope, on the spinning side determined orientation and spin rate. It also made several scientific discoveries serendipitously. In the prime mission (the mission to Jupiter), it was found that the star scanner was able to detect high-energy particles as a noise signal.</div>
+            </div>
+            <div id="text12">
+                <h3>Scan Platform</h3></br>
+                <div id="content">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit am.</div>
+            </div>
+            <div id="text13">
+                <h3>Probe Relay Antenna</h3></br>
+                <div id="content">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. </div>
+            </div>
+            <div id="text14">
+                <h3>Sun Shields</h3></br>
+                <div id="content">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. </div>
             </div>
         </div>
-         <div id="text3">
-          <h3>Fuselage</h3></br>
-          <div id="content">The orbiter featured an innovative "dual-spin" design. Most spacecraft are stabilized in flight either by spinning around a major axis, or by maintaining a fixed orientation in space, referenced to the Sun and another star. As the first dual-spin planetary spacecraft, Galileo combined these techniques. </br></br>
-            A spinning section rotated at about 3 rpm (=revolutions per minute), and a "despun" section was counter-rotated to provide a fixed orientation for cameras and other remote sensors. 
-            The power supply, propulsion module and most of the computers and control electronics were mounted on the spinning section. 
-            </div>
-         </div>
-         <div id="text4">
-         <h3>Energetic-particle detector</h3></br>
-           <div id="content">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</div>
-          </div>
-          <div id="text5">
-            <h3>Magnetometer Sensors</h3></br>
-            <div id="content">The spinning section carried instruments to study magnetic fields and charged particles. These instruments included magnetometer sensors mounted on a 36-foot (11-meter) boom to minimize interference from the spacecraft's electronics.</div>
-           </div>
-         <div id="text6">
-            <h3>Plasma-wave detector</h3></br>
-            <div id="content">The plasma-wave detector studied electromagnetic waves generated by the particles.</div>
-           </div>
-         <div id="text7">
-           <h3>Extreme Ultraviolet Spectrometer</h3></br>
-          <div id="content">The extreme ultraviolet detector, associated with the ultraviolet spectrometer, studied gases.</div>
-         </div>
-         <div id="text8">
-           <h3>Radioisotope thermoelectric Generators</h3></br>
-          <div id="content">Electrical power was provided by two radioisotope thermoelectric generators. Heat produced by natural radioactive decay of plutonium was converted to electricity (570 watts at launch, 485 at the end of the mission) to operate the orbiter spacecraft's equipment.</div>
-         </div>
-         <div id="text9">
-           <h3>Thrusters</h3></br>
-          <div id="content">The spacecraft's propulsion module consisted of 12 2.25-pound-force (10-newton) thrusters and a single 90-pound-force (400-newton) engine which used monomethylhydrazine fuel and nitrogen-tetroxide oxidizer.</div>
-         </div>
-         <div id="text10">
-            <h3>Dust Counter</h3></br>
-            <div id="content">The dust counter counted particles of dust in space, usually when they had an impact on the instrument. More precisely, the job of this instrument was to examine dust in the Jovian system to see where it comes from, where it goes, and what happens to it in between.</div>
-           </div>
-         <div id="text11">
-            <h3>Star Scanner</h3></br>
-            <div id="content">The star scanner, a small optical telescope, on the spinning side determined orientation and spin rate. It also made several scientific discoveries serendipitously. In the prime mission (the mission to Jupiter), it was found that the star scanner was able to detect high-energy particles as a noise signal.</div>
-           </div>
-         <div id="text12">
-            <h3>Scan Platform</h3></br>
-            <div id="content">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit am.</div>
-           </div>
-         <div id="text13">
-            <h3>Probe Relay Antenna</h3></br>
-            <div id="content">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. </div>
-           </div>
-         <div id="text14">
-            <h3>Sun Shields</h3></br>
-            <div id="content">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. </div>
-           </div>
-         <!--<div id="text15">
-            <h2>Wip</h2></br>
-            <div id="content">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</div>
-           </div>
-         <div id="text16">
-            <h2>Radioisotope</h2></br>
-            <div id="content">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</div>
-           </div>
-         <div id="text17">
-            <h2></h2></br>
-            <div id="content">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.</div>
-           </div>
-         <div id="text18">
-            <h2></h2></br>
-            <div id="content">Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. </div>
-           </div>-->
-      </div>
-    <div id="hoverbuttons" class="hidden">
-      <div id="HelpButton" class="hidden">
-          <input type= "image" id="helpimage" src= "images/EXPLAIN-GALILEO.png" onclick="ToggleHelp('helptext')"/>
-      </div>
-      <div data-spy = "affix" id="mySidenav" data-offset-top|bottom>
-       <ul>
-        <li onmouseover = "hoverSide(0, true)" onmouseout = "hoverSide(0, false)" onclick="goToOverview()" id="Overview" class="awesome-tooltip" title= "Overview"><a></a></li>
-        <li onmouseover = "hoverSide(1, true)" onmouseout = "hoverSide(1, false)" onclick="goToComp(1)" id="Comp1" class="awesome-tooltip" title = "Low-gain Antenna"><a></a></li>
-        <li onmouseover = "hoverSide(2, true)" onmouseout = "hoverSide(2, false)" onclick="goToComp(2)" id="Comp2" class="awesome-tooltip" title = "Descent probe"></li><a></a></li>
-        <li onmouseover = "hoverSide(3, true)" onmouseout = "hoverSide(3, false)" onclick="goToComp(3)" id="Comp3" class="awesome-tooltip" title = "Fuselage"><a></a></li>
-        <li onmouseover = "hoverSide(4, true)" onmouseout = "hoverSide(4, false)" onclick="goToComp(4)" id="Comp4" class="awesome-tooltip" title = "Energetic-particle detector"><a></a></li>
-        <li onmouseover = "hoverSide(5, true)" onmouseout = "hoverSide(5, false)" onclick="goToComp(5)" id="Comp5" class="awesome-tooltip" title = "Magnetometer sensors"><a></a></li>
-        <li onmouseover = "hoverSide(6, true)" onmouseout = "hoverSide(6, false)" onclick="goToComp(6)" id="Comp6" class="awesome-tooltip" title = "Plasma Wave Antenna"><a></a></li>
-        <li onmouseover = "hoverSide(7, true)" onmouseout = "hoverSide(7, false)" onclick="goToComp(7)" id="Comp7" class="awesome-tooltip" title = "Extreme Ultraviolet Spectrometer"><a></a></li>
-        <li onmouseover = "hoverSide(8, true)" onmouseout = "hoverSide(8, false)" onclick="goToComp(8)" id="Comp8" class="awesome-tooltip" title = "Radioisotope thermoelectric Generators"><a></a></li>
-        <li onmouseover = "hoverSide(9, true)" onmouseout = "hoverSide(9, false)" onclick="goToComp(9)" id="Comp9" class="awesome-tooltip" title = "Thrusters"><a></a></li>
-        <li onmouseover = "hoverSide(10, true)" onmouseout = "hoverSide(10, false)" onclick="goToComp(10)" id="Comp10" class="awesome-tooltip" title = "Dust Counter"><a></a></li>
-        <li onmouseover = "hoverSide(11, true)" onmouseout = "hoverSide(11, false)" onclick="goToComp(11)" id="Comp11" class="awesome-tooltip" title = "Star Scanner"><a></a></li>
-        <li onmouseover = "hoverSide(12, true)" onmouseout = "hoverSide(12, false)" onclick="goToComp(12)" id="Comp12" class="awesome-tooltip" title = "Scan platform"><a></a></li>
-        <li onmouseover = "hoverSide(13, true)" onmouseout = "hoverSide(13, false)" onclick="goToComp(13)" id="Comp13" class="awesome-tooltip" title = "Probe Relay Antenna"><a></a></li>
-        <li onmouseover = "hoverSide(14, true)" onmouseout = "hoverSide(14, false)" onclick="goToComp(14)" id="Comp14" class="awesome-tooltip" title = "Sun shields"><a></a></li>
-        </ul>
-      </div>
-      <div data-spy = "affix" id="mySecNav" data-offset-top|bottom>
-       <ul>
-        <li onmouseover = "hoverSide(0, true)" onmouseout = "hoverSide(0, false)" onclick="goToOverview()"><a></a></li>
-        <li onmouseover = "hoverSide(1, true)" onmouseout = "hoverSide(1, false)" onclick="goToComp(1)"><a></a></li>
-        <li onmouseover = "hoverSide(2, true)" onmouseout = "hoverSide(2, false)" onclick="goToComp(2)"><a></a></li>
-        <li onmouseover = "hoverSide(3, true)" onmouseout = "hoverSide(3, false)" onclick="goToComp(3)"><a></a></li>
-        <li onmouseover = "hoverSide(4, true)" onmouseout = "hoverSide(4, false)" onclick="goToComp(4)"><a></a></li>
-        <li onmouseover = "hoverSide(5, true)" onmouseout = "hoverSide(5, false)" onclick="goToComp(5)"><a></a></li>
-        <li onmouseover = "hoverSide(6, true)" onmouseout = "hoverSide(6, false)" onclick="goToComp(6)"><a></a></li>
-        <li onmouseover = "hoverSide(7, true)" onmouseout = "hoverSide(7, false)" onclick="goToComp(7)"><a></a></li>
-        <li onmouseover = "hoverSide(8, true)" onmouseout = "hoverSide(8, false)" onclick="goToComp(8)"><a></a></li>
-        <li onmouseover = "hoverSide(9, true)" onmouseout = "hoverSide(9, false)" onclick="goToComp(9)"><a></a></li>
-        <li onmouseover = "hoverSide(10, true)" onmouseout = "hoverSide(10, false)" onclick="goToComp(10)"><a></a></li>
-        <li onmouseover = "hoverSide(11, true)" onmouseout = "hoverSide(11, false)" onclick="goToComp(11)"><a></a></li>
-        <li onmouseover = "hoverSide(12, true)" onmouseout = "hoverSide(12, false)" onclick="goToComp(12)"><a></a></li>
-        <li onmouseover = "hoverSide(13, true)" onmouseout = "hoverSide(13, false)" onclick="goToComp(13)"><a></a></li>
-        <li onmouseover = "hoverSide(14, true)" onmouseout = "hoverSide(14, false)" onclick="goToComp(14)"><a></a></li>
-        </ul>
-      </div>
-    </div>
 
-    <div id="simple-icons" class="hidden">
-        <image id="helpimage1" src="images/Drag-and-click.png"></image>
-        <image id="helpimage2" src="images/Scroll-zoom.png"></image>
-    </div>
-    <div id ="overview-button" class="hidden">
-      <image id="closeimage" src="images/Close-Icon.png" onmouseover = "hoverOverviewButton(true, this)" onmouseout = "hoverOverviewButton(false, this)" onclick = "goToOverview()"></image>
-    </div>
-<!-- if you leave room for the overview button you can put images here like in the car example TODO-->
-    <div id="helptext" onclick="ToggleHelp('helptext')" >
-      <input type="image" id="closeimage_help" src="images/Close-Icon.png"  onmouseover="this.src='images/Close-Icon-Word.png'" onmouseout="this.src='images/Close-Icon.png'"/>
-      <div id="text">
-        <h3>Exploring GALILEO</h3><div id="copyright">© Study project by Thomas Wink and Nergis Kuru.</div></br>
-        <div id="content">The information visualization provides an overview of all science instruments and components of NASA’s satellite GALILEO. You are presented with a detailed description of the devices and their functions. To get to these detailed descriptions, you can move your mouse over the 3D model – various components are then highlighted. Once clicked, you will be taken to the respective pages describing them. Alternatively, you can also click on navigation points on the right side.
+        <!--This is the right hand side of the screen-->
+      <div id="hoverbuttons" class="hidden">
+          <!--This is the help button-->
+          <div id="HelpButton" class="hidden">
+              <input type= "image" id="helpimage" src= "images/EXPLAIN-GALILEO.png" onclick="ToggleHelp('helptext')"/>
           </div>
-          
+          <!--this is the navigation bar--><!--"#CUSTOMIZATION"-->
+          <div data-spy = "affix" id="mySidenav" data-offset-top|bottom>
+              <ul>
+                  <li onmouseover = "hoverSide(0, true)" onmouseout = "hoverSide(0, false)" onclick="goToOverview()" id="Overview" class="awesome-tooltip" title= "Overview"><a></a></li>
+                  <li onmouseover = "hoverSide(1, true)" onmouseout = "hoverSide(1, false)" onclick="goToComp(1)" id="Comp1" class="awesome-tooltip" title = "Low-gain Antenna"><a></a></li>
+                  <li onmouseover = "hoverSide(2, true)" onmouseout = "hoverSide(2, false)" onclick="goToComp(2)" id="Comp2" class="awesome-tooltip" title = "Descent probe"></li><a></a></li>
+                  <li onmouseover = "hoverSide(3, true)" onmouseout = "hoverSide(3, false)" onclick="goToComp(3)" id="Comp3" class="awesome-tooltip" title = "Fuselage"><a></a></li>
+                  <li onmouseover = "hoverSide(4, true)" onmouseout = "hoverSide(4, false)" onclick="goToComp(4)" id="Comp4" class="awesome-tooltip" title = "Energetic-particle detector"><a></a></li>
+                  <li onmouseover = "hoverSide(5, true)" onmouseout = "hoverSide(5, false)" onclick="goToComp(5)" id="Comp5" class="awesome-tooltip" title = "Magnetometer sensors"><a></a></li>
+                  <li onmouseover = "hoverSide(6, true)" onmouseout = "hoverSide(6, false)" onclick="goToComp(6)" id="Comp6" class="awesome-tooltip" title = "Plasma Wave Antenna"><a></a></li>
+                  <li onmouseover = "hoverSide(7, true)" onmouseout = "hoverSide(7, false)" onclick="goToComp(7)" id="Comp7" class="awesome-tooltip" title = "Extreme Ultraviolet Spectrometer"><a></a></li>
+                  <li onmouseover = "hoverSide(8, true)" onmouseout = "hoverSide(8, false)" onclick="goToComp(8)" id="Comp8" class="awesome-tooltip" title = "Radioisotope thermoelectric Generators"><a></a></li>
+                  <li onmouseover = "hoverSide(9, true)" onmouseout = "hoverSide(9, false)" onclick="goToComp(9)" id="Comp9" class="awesome-tooltip" title = "Thrusters"><a></a></li>
+                  <li onmouseover = "hoverSide(10, true)" onmouseout = "hoverSide(10, false)" onclick="goToComp(10)" id="Comp10" class="awesome-tooltip" title = "Dust Counter"><a></a></li>
+                  <li onmouseover = "hoverSide(11, true)" onmouseout = "hoverSide(11, false)" onclick="goToComp(11)" id="Comp11" class="awesome-tooltip" title = "Star Scanner"><a></a></li>
+                  <li onmouseover = "hoverSide(12, true)" onmouseout = "hoverSide(12, false)" onclick="goToComp(12)" id="Comp12" class="awesome-tooltip" title = "Scan platform"><a></a></li>
+                  <li onmouseover = "hoverSide(13, true)" onmouseout = "hoverSide(13, false)" onclick="goToComp(13)" id="Comp13" class="awesome-tooltip" title = "Probe Relay Antenna"><a></a></li>
+                  <li onmouseover = "hoverSide(14, true)" onmouseout = "hoverSide(14, false)" onclick="goToComp(14)" id="Comp14" class="awesome-tooltip" title = "Sun shields"><a></a></li>
+              </ul>
+          </div>
+          <!--This is the text next to the buttons of the navbar--><!--"#CUSTOMIZATION"-->
+          <div data-spy = "affix" id="mySecNav" data-offset-top|bottom>
+              <ul>
+                <li onmouseover = "hoverSide(0, true)" onmouseout = "hoverSide(0, false)" onclick="goToOverview()"><a></a></li>
+                <li onmouseover = "hoverSide(1, true)" onmouseout = "hoverSide(1, false)" onclick="goToComp(1)"><a></a></li>
+                <li onmouseover = "hoverSide(2, true)" onmouseout = "hoverSide(2, false)" onclick="goToComp(2)"><a></a></li>
+                <li onmouseover = "hoverSide(3, true)" onmouseout = "hoverSide(3, false)" onclick="goToComp(3)"><a></a></li>
+                <li onmouseover = "hoverSide(4, true)" onmouseout = "hoverSide(4, false)" onclick="goToComp(4)"><a></a></li>
+                <li onmouseover = "hoverSide(5, true)" onmouseout = "hoverSide(5, false)" onclick="goToComp(5)"><a></a></li>
+                <li onmouseover = "hoverSide(6, true)" onmouseout = "hoverSide(6, false)" onclick="goToComp(6)"><a></a></li>
+                <li onmouseover = "hoverSide(7, true)" onmouseout = "hoverSide(7, false)" onclick="goToComp(7)"><a></a></li>
+                <li onmouseover = "hoverSide(8, true)" onmouseout = "hoverSide(8, false)" onclick="goToComp(8)"><a></a></li>
+                <li onmouseover = "hoverSide(9, true)" onmouseout = "hoverSide(9, false)" onclick="goToComp(9)"><a></a></li>
+                <li onmouseover = "hoverSide(10, true)" onmouseout = "hoverSide(10, false)" onclick="goToComp(10)"><a></a></li>
+                <li onmouseover = "hoverSide(11, true)" onmouseout = "hoverSide(11, false)" onclick="goToComp(11)"><a></a></li>
+                <li onmouseover = "hoverSide(12, true)" onmouseout = "hoverSide(12, false)" onclick="goToComp(12)"><a></a></li>
+                <li onmouseover = "hoverSide(13, true)" onmouseout = "hoverSide(13, false)" onclick="goToComp(13)"><a></a></li>
+                <li onmouseover = "hoverSide(14, true)" onmouseout = "hoverSide(14, false)" onclick="goToComp(14)"><a></a></li>
+              </ul>
+          </div>
       </div>
-    </div>
-    
 
-    <script src="interface.js"></script>
-    <script src="model.js"></script>
-  </body>
+      <!--These are the icons in the bottom left-->
+      <!--The two help icons-->
+      <div id="simple-icons" class="hidden">
+          <image id="helpimage1" src="images/Drag-and-click.png"></image>
+          <image id="helpimage2" src="images/Scroll-zoom.png"></image>
+      </div>
+      <!--The button to go back to the overview-->
+      <div id ="overview-button" class="hidden">
+          <image id="closeimage" src="images/Close-Icon.png" onmouseover = "hoverOverviewButton(true, this)" onmouseout = "hoverOverviewButton(false, this)" onclick = "goToOverview()"></image>
+      </div>
+
+      <!--This is the overlay for the helptext-->
+      <div id="helptext" onclick="ToggleHelp('helptext')" >
+          <!--This is the button to quit the overlay-->
+          <input type="image" id="closeimage_help" src="images/Close-Icon.png"  onmouseover="this.src='images/Close-Icon-Word.png'" onmouseout="this.src='images/Close-Icon.png'"/>
+          <!--This is the helptext itself-->
+          <div id="text">
+              <h3>Exploring GALILEO</h3><div id="copyright">© Study project by Thomas Wink and Nergis Kuru.</div></br>
+              <div id="content">The information visualization provides an overview of all science instruments and components of NASA’s satellite GALILEO. You are presented with a detailed description of the devices and their functions. To get to these detailed descriptions, you can move your mouse over the 3D model – various components are then highlighted. Once clicked, you will be taken to the respective pages describing them. Alternatively, you can also click on navigation points on the right side.
+              </div>
+          </div>
+      </div>
+      <!--"#CUSTOMIZATION"-->
+
+      <!--The scripts to run the whole animation-->
+      <script src="interface.js"></script>
+      <script src="model.js"></script>
+    </body>
 </html>
