@@ -1,6 +1,7 @@
 var paused = 1;
 var help = false;
 
+//called when hovering over the "back to overview" button, controls the look of the button and the sidebar tooltip
 function hoverOverviewButton(trueorfalse, buttonobject){
     if(trueorfalse){
         buttonobject.src = 'images/Close-Icon-Word.png';
@@ -15,10 +16,10 @@ function hoverOverviewButton(trueorfalse, buttonobject){
         $('[id="Overview"]').tooltip('hide');
         if(div != null)
             div.classList.remove("special");
-
     }
 }
 
+//called when going from zoomview to overview, controls tooltips, zoomtext and animation endposition
 function goToOverview(){
     if (zoomview){
         controls.enabled = false;
@@ -47,17 +48,9 @@ function goToOverview(){
         var params = [posOverview[0], posOverview[1], posOverview[2], 2000]
         cameraPan(params);
     }
-    else if(overview){
-        var div = document.getElementById('Overview');
-        $('[id="Overview"]').tooltip('show');
-        if(div != null)
-            div.classList.add("special");
-        document.getElementById("text0").style.display = "block";
-        document.getElementById("zoomviewtext").style.display = "block";
-
-    }
 }
 
+//controls wether the "back to overview" button is shown
 function setOverviewButton(trueorfalse){
     if(trueorfalse) {
         var item = document.getElementById("overview-button");
@@ -71,8 +64,8 @@ function setOverviewButton(trueorfalse){
     }
 }
 
+//called when component is clicked in the navbar, translates to model.js and calls componentClicked
 function goToComp(i){
-    var item = document.getElementById("Comp" + i);
     var object;
     for (var k = 0; k< scene.children.length; k++){
         if(scene.children[k].type == "Scene")
@@ -81,6 +74,7 @@ function goToComp(i){
     componentClicked(object);
 }
 
+//called when going from landing page to overview, hides landing page, unhides overview, and calls initial animation
 function LandingToOverview(clickedButton, divID, divID2) {
     var item = document.getElementById(divID);
     if (item) {
@@ -101,17 +95,8 @@ function LandingToOverview(clickedButton, divID, divID2) {
     var params = [posOverview[0], posOverview[1], posOverview[2], 2000];
     cameraPan(params);
 }
-//activating controls reactivated from animation loader
 
-function landingpageText(divID){
-    if(divID == "starttext1"){
-        document.getElementById("starttext1").style.display = "none";
-        document.getElementById("starttext2").style.display = "block";
-    }
-    else
-    document.getElementById("starttext2").style.display = "none";
-}
-
+//Toggles the help-overlay and pauses controls
 function ToggleHelp(divID) {
     if (help){
         document.getElementById(divID).style.display = "none";
@@ -142,10 +127,9 @@ function ToggleHelp(divID) {
         paused = 0;
     }
     controls.enabled = !controls.enabled;
-    //animation
-
 }
 
+//called when hovering over the navigation bar or close to the left to it and controls the tooltips
 function hoverSide(id, over) {
     var y;
     if(id != 0)
@@ -160,7 +144,7 @@ function hoverSide(id, over) {
                 if(scene.children[k].type == "Scene")
                     object = scene.children[k].children[id];
             }
-            mouseHover(object, true);
+            mouseHover(object);
         }
         var div = document.getElementById(y);
         $('[id="'+y+'"]').tooltip('show');
@@ -190,6 +174,7 @@ function hoverSide(id, over) {
     }
 }
 
+//initialization of tooltips
 function tooltiptinit(){
     $('[data-toggle="tooltip"]').tooltip();   
     $('.awesome-tooltip').tooltip({

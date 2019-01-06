@@ -64,6 +64,7 @@ function init() {
     sceneObject = scene;
 }
 
+//controls which zoomtext is shown
 function showZoomtext(objname){
     document.getElementById("zoomviewtext").style.display = "block";
     for(var k = 0; k< 15; k++)
@@ -98,6 +99,7 @@ function showZoomtext(objname){
         document.getElementById("text14").style.display = "block";
 }
 
+//controls the animation from one point to another, changes opacity of components, sets controls as needed and controls the tooltips and navbar
 function cameraPan(params) {
     for(var y = 0; y < objects.length; y++){
         objects[y].material.transparent = true;
@@ -174,6 +176,7 @@ function cameraPan(params) {
         .start();
 }
 
+//sets animation in motion with correct endpoint and calls camerapan and showzoomtext
 function componentClicked(object){
     overview = false;
     setOverviewButton(true);
@@ -189,11 +192,9 @@ function componentClicked(object){
     }
     selectedComponent = object;
     controls.target = object.position;
-    var o = 0;
     for(var x = 0; x<objects.length; x++){
         if(objects[x] == object || objects[x].parent == object){
             objects[x].material.transparent = false;
-            o++;
             var g = x + 1;
             var y = 'Comp' + g;
             var div = document.getElementById(y);
@@ -203,7 +204,6 @@ function componentClicked(object){
         }
         else{
             objects[x].material.transparent = true;
-            o++;
             var g = x + 1;
             var y = 'Comp' + g;
             var div = document.getElementById(y);
@@ -213,6 +213,7 @@ function componentClicked(object){
         }
     }
 
+    //controls endposition of animation
     var params = [20, 20, 0, 2000];
     switch (selectedComponent.name) {
         case "Low-gain_antenna":
@@ -292,8 +293,8 @@ function componentClicked(object){
     showZoomtext(objname);
 }
 
+//controls the mousecontrols
 function setAnimation(trueorfalse){
-    //controls.enabled = trueorfalse;
     if(trueorfalse){
         pauseControls(document);
         paused = 1;
@@ -305,26 +306,20 @@ function setAnimation(trueorfalse){
     }
 }
 
+//eventhandler for a click
 function onDocumentMouseDown(event) {
     event.preventDefault();
-
     mouse.x = (event.clientX / renderer.domElement.clientWidth) * 2 - 1;
     mouse.y =  - (event.clientY / renderer.domElement.clientHeight) * 2 + 1;
-
     raycaster.setFromCamera(mouse, camera);
-
     var intersects = raycaster.intersectObjects(objects);
-
     if (intersects.length > 0) {
         componentClicked(intersects[0].object);
     }
-
 }
 
-function mouseHover (object, sidebar) {
-    if (sidebar){
-
-    }
+//controls opacity of component while hovering over navbar or over model itself
+function mouseHover (object) {
     for(var x = 0; x<objects.length; x++){
         if(objects[x] == object || objects[x].parent == object){
             if(objects[x].parent.type == "Group"){
@@ -370,6 +365,7 @@ function mouseHover (object, sidebar) {
     }
 }
 
+//eventhandler for moving the mouse 
 function onDocumentMouseMove(event) {
     event.preventDefault();
 
@@ -383,7 +379,7 @@ function onDocumentMouseMove(event) {
     if (intersects.length > 0) {
         //hover mechanic
         canvas.style.cursor = "pointer";
-        mouseHover(intersects[0].object, false);
+        mouseHover(intersects[0].object);
         for(var c = 0; c < objects.length; c++){
             if(intersects[0].object == objects[c] ){
                 var g = c + 1;
@@ -410,7 +406,6 @@ function onDocumentMouseMove(event) {
             opashouldby = 0.2;
         }
         canvas.style.cursor = "default";
-        var o = 0;
         var c;
         for(var x = 0; x<objects.length; x++){
             if(objects[x] == selectedComponent || objects[x].parent == selectedComponent){
@@ -444,61 +439,60 @@ function onDocumentMouseMove(event) {
     }
 }
 
+//called from setAnimation()
 function activateControls(document) {
-  document.addEventListener('mousedown', onDocumentMouseDown, false);
-  document.addEventListener('mousemove', onDocumentMouseMove, false);
+    document.addEventListener('mousedown', onDocumentMouseDown, false);
+    document.addEventListener('mousemove', onDocumentMouseMove, false);
 }
 
+//called from setAnimation()
 function pauseControls(document) {
-  document.removeEventListener('mousedown', onDocumentMouseDown, false);
-  document.removeEventListener('mousemove', onDocumentMouseMove, false);
+    document.removeEventListener('mousedown', onDocumentMouseDown, false);
+    document.removeEventListener('mousemove', onDocumentMouseMove, false);
 }
 
+//loads the model with the modelloader
 function loadModel(modelname) {
-
-  var newScene = new THREE.Scene();
-  clock = new THREE.Clock();
-  newScene.fog = new THREE.FogExp2( 0xcccccc, 0.002 );
+    var newScene = new THREE.Scene();
+    clock = new THREE.Clock();
+    newScene.fog = new THREE.FogExp2( 0xcccccc, 0.002 );
   
-  // model
-  var loader = new THREE.GLTFLoader();
-  loader.load( modelname, function ( gltf ) { //UPLOAD MODEL HERE
-    gltf.scene.traverse( function ( child ) {
-      if ( child.isMesh ) {
-        child.material.transparent = true;
-        child.material.opacity = 0.5;
-        objects.push(child);
-      }
+    // model
+    var loader = new THREE.GLTFLoader();
+    loader.load( modelname, function ( gltf ) { //UPLOAD MODEL HERE
+        gltf.scene.traverse( function ( child ) {
+        if ( child.isMesh ) {
+            child.material.transparent = true;
+            child.material.opacity = 0.5;
+            objects.push(child);
+        }
+        } );
+        newScene.add( gltf.scene );
+
+    }, undefined, function ( e ) {
+
+        console.error( e );
+
     } );
-    newScene.add( gltf.scene );
-
-  }, undefined, function ( e ) {
-
-    console.error( e );
-
-  } );
-  return newScene
+    return newScene
 }
 
+//handles the camera on window resize
 function onWindowResize() {
-
-  camera.aspect = window.innerWidth / window.innerHeight;
-  camera.updateProjectionMatrix();
-
-  renderer.setSize( window.innerWidth, window.innerHeight );
-
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize( window.innerWidth, window.innerHeight );
 }
 
+//program controlloop
 function animate() {
     TWEEN.update();
-
     requestAnimationFrame( animate );
-
     controls.update(); // only required if controls.enableDamping = true, or if controls.autoRotate = true
     render();
-
 }
 
+//render function
 function render() {
     renderer.render( scene, camera );
 }
