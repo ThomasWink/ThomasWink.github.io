@@ -1,18 +1,12 @@
 if ( WEBGL.isWebGLAvailable() === false ) {
-
   document.body.appendChild( WEBGL.getWebGLErrorMessage() );
-
 }
-var mixer, animationClip, gltfStore;
+//All variables to be generally used
 var camera, controls, scene, renderer, sceneObject, clock;
 var objects = [];
-var animation = [];
-var z = 0;
-var saveCamera;
 var raycaster;
 var mouse = new THREE.Vector2();
 var overviewhasbeen = false;
-var startQ, endQ;
 var selectedComponent;
 var mousehovering = false;
 
@@ -49,11 +43,9 @@ function init() {
     controls.maxDistance = 25;
     controls.enablePan = false;
     controls.enabled = false;
-    gltfStore = {};
 
     // modelimport
     var stableModel = 'models/v4.2/Galileo.gltf';
-    newModel = 'models/v4.1/Galileo.json';
     scene = loadModel(stableModel); 
 
     // lights
@@ -110,13 +102,11 @@ function cameraPan(params) {
     for(var y = 0; y < objects.length; y++){
         objects[y].material.transparent = true;
     }
-    
     var to = {
         x: params[0],
         y: params[1],
         z: params[2]
     };
-
     controls.target = new THREE.Vector3(0, 0, 0);
     var tween = new TWEEN.Tween(camera.position)
         .to(to, params[3])
