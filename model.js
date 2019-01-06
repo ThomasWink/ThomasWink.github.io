@@ -289,24 +289,24 @@ function componentClicked(object){
     var params = [20, 20, 0, 2000];
     switch (selectedComponent.name) {
         case "Low-gain_antenna":
-            params[0] = 12;
-            params[1] = 8;
-            params[2] = 2;
+            params[0] = 5.4;
+            params[1] = 9.3;
+            params[2] = 3.1;
             break;
         case "Descent_probe":
-            params[0] = 6;
+            params[0] = -4;
             params[1] = -5;
-            params[2] = 0;
+            params[2] = 4;
             break;
         case "Fuselage":
-            params[0] = 8;
-            params[1] = 8;
-            params[2] = -9;
+            params[0] = 12.4;
+            params[1] = 3.2;
+            params[2] = -2.2;
             break;
         case "Energetic-particle_detector":
-            params[0] = 2.5;
-            params[1] = 1.7;
-            params[2] = -5;
+            params[0] = 4.2;
+            params[1] = 6;
+            params[2] = -3.5;
             break;
         case "Magnetometer_sensors001": 
             params[0] = 12;
@@ -324,24 +324,24 @@ function componentClicked(object){
             params[2] = 0;
             break;
         case "Radioisotope_thermoelectric_generators":
-            params[0] = 0;
-            params[1] = 3;
-            params[2] = 8;
+            params[0] = -6.2;
+            params[1] = 1.8;
+            params[2] = 7.5;
             break;
         case "Thrusters_2":
-            params[0] = 0;
-            params[1] = -3;
-            params[2] = 7;
+            params[0] = -6;
+            params[1] = 3;
+            params[2] = 3.4;
             break;
         case "Dust_counter_(at_rear)":
-            params[0] = -2;
-            params[1] = -3;
-            params[2] = -7;
+            params[0] = 5.1;
+            params[1] = -0.3;
+            params[2] = -8.5;
             break;
         case "Star_scanner_(at_rear)":
-            params[0] = 3;
-            params[1] = 3;
-            params[2] = 5;
+            params[0] = 5.5;
+            params[1] = 2.7;
+            params[2] = -2.2;
             break;
         case "Scan_platform":
             params[0] = -4;
@@ -349,9 +349,9 @@ function componentClicked(object){
             params[2] = 5;
             break;
         case "Probe_Relay_Antenna":
-            params[0] = -6;
-            params[1] = -1.5;
-            params[2] = -3;
+            params[0] = 10;
+            params[1] = 1.4;
+            params[2] = 0.4;
             break;
         case "Sun_shields_":
             params[0] = 7;
