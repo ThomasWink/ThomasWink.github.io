@@ -43,7 +43,7 @@ function goToOverview(){
         
         document.getElementById("text0").style.display = "block";
         document.getElementById("zoomviewtext").style.display = "block";
-        for(var k = 1; k< 15; k++)
+        for(var k = 1; k< amount; k++)
             document.getElementById("text" + k).style.display = "none";
         var params = [posOverview[0], posOverview[1], posOverview[2], 2000]
         cameraPan(params);

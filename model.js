@@ -9,6 +9,12 @@ var mouse = new THREE.Vector2();
 var overviewhasbeen = false;
 var selectedComponent;
 var mousehovering = false;
+//"#CUSTOMIZATION, set these to your own liking"
+var overviewmindist = 10;
+var overviewmaxdist = 25;
+var zoommindist = 5;
+var zoommaxdist = 15;
+var amount = 15; //CHANGE THIS TO THE AMOUNT OF COMPONENTS MINUS 1  "#CUSTOMIZATION"
 
 var posLandingPage;
 var posOverview;
@@ -39,12 +45,12 @@ function init() {
     controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
     controls.dampingFactor = 0.25;
     controls.screenSpacePanning = false;
-    controls.minDistance = 10;
-    controls.maxDistance = 25;
+    controls.minDistance = overviewmindist;
+    controls.maxDistance = overviewmaxdist;
     controls.enablePan = false;
     controls.enabled = false;
 
-    // modelimport
+    // modelimport          IMPORT YOUR OWN MODEL HERE  "#CUSTOMIZATION"
     var stableModel = 'models/v4.2/Galileo.gltf';
     scene = loadModel(stableModel); 
 
@@ -65,9 +71,10 @@ function init() {
 }
 
 //controls which zoomtext is shown
-function showZoomtext(objname){
+function showZoomtext(objname){ 
+    //THEN SET THE CORRECT OBJNAMEs IN THIS SWITCH  "#CUSTOMIZATION" 
     document.getElementById("zoomviewtext").style.display = "block";
-    for(var k = 0; k< 15; k++)
+    for(var k = 0; k< amount; k++)
         document.getElementById("text" + k).style.display = "none";
     if (objname == "Low-gain_antenna")
         document.getElementById("text1").style.display = "block";
@@ -115,13 +122,13 @@ function cameraPan(params) {
         .easing(TWEEN.Easing.Linear.None)
         .onStart(function(){
             if (overview){
-                controls.maxDistance = 25;
+                controls.maxDistance = overviewmaxdist;
                 for(var x = 0; x<objects.length; x++){
                     objects[x].material.opacity = 0.5;
                 }
             }
             else
-                controls.minDistance = 5;
+                controls.minDistance = zoommindist;
                 for(var x = 0; x<objects.length; x++){
                     if(objects[x] == selectedComponent){
                         objects[x].material.transparent = false;
@@ -156,16 +163,16 @@ function cameraPan(params) {
                 if(div != null)
                     div.classList.remove("special");
                 zoomview = true;
-                controls.minDistance = 5;
-                controls.maxDistance = 15;
+                controls.minDistance = zoommindist;
+                controls.maxDistance = zoommaxdist;
             }
             else{
                 var div = document.getElementById('Overview');
                 $('[id="Overview"]').tooltip('show');
                 if(div != null)
                     div.classList.add("special");
-                controls.minDistance = 10;
-                controls.maxDistance = 25;
+                controls.minDistance = overviewmindist;
+                controls.maxDistance = overviewmaxdist;
                 document.getElementById("zoomviewtext").style.display = "block";
                 document.getElementById("text0").style.display = "block";
             }
@@ -215,7 +222,7 @@ function componentClicked(object){
 
     //controls endposition of animation
     var params = [20, 20, 0, 2000];
-    switch (selectedComponent.name) {
+    switch (selectedComponent.name) { // "#CUSTOMIZATION" THESE NAMES NEED TO BE CHANGED
         case "Low-gain_antenna":
             params[0] = 5.4;
             params[1] = 9.3;
@@ -459,7 +466,7 @@ function loadModel(modelname) {
   
     // model
     var loader = new THREE.GLTFLoader();
-    loader.load( modelname, function ( gltf ) { //UPLOAD MODEL HERE
+    loader.load( modelname, function ( gltf ) {
         gltf.scene.traverse( function ( child ) {
         if ( child.isMesh ) {
             child.material.transparent = true;
