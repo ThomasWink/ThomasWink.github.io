@@ -254,6 +254,7 @@ b.none { /*not implemented yet TODO */
   height: 50px;
   left: 30px;
   bottom: 30px;
+  cursor: pointer;
 }
 
 
