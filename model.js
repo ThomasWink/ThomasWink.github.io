@@ -4,7 +4,7 @@ if ( WEBGL.isWebGLAvailable() === false ) {
 
 }
 var mixer, animationClip, gltfStore;
-var camera, controls, scene, renderer, sceneObject, clock, backupScene;
+var camera, controls, scene, renderer, sceneObject, clock;
 var objects = [];
 var animation = [];
 var z = 0;
@@ -14,8 +14,6 @@ var mouse = new THREE.Vector2();
 var overviewhasbeen = false;
 var startQ, endQ;
 var selectedComponent;
-var lokat;
-var OpArray = [];
 var mousehovering = false;
 
 var posLandingPage;
@@ -31,11 +29,8 @@ function init() {
     posOverview = [10, 3, 10];
     raycaster = new THREE.Raycaster();
     scene = new THREE.Scene();
-    backupScene = new THREE.Scene();
     clock = new THREE.Clock();
-    //scene.background = new THREE.TextureLoader().load( "images/spacebackground_temp.jpg" );
     scene.fog = new THREE.FogExp2( 0xcccccc, 0.002 );
-    backupScene.fog = new THREE.FogExp2( 0xcccccc, 0.002 );
 
     renderer = new THREE.WebGLRenderer( { antialias: true } );
     renderer.setPixelRatio( window.devicePixelRatio );
@@ -43,45 +38,23 @@ function init() {
     document.body.appendChild( renderer.domElement );
 
     camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 1, 1000 );
-    //camera.rotation._x = -0.5 * Math.PI;
-    //camera.rotation._y = 0;
-    //camera.rotation._z = 0.33 * Math.PI;
     camera.position.set(posLandingPage[0], posLandingPage[1], posLandingPage[2]);
+    
     // controls
     controls = new THREE.OrbitControls( camera, renderer.domElement );
-
-    //controls.addEventListener( 'change', render ); // call this only in static scenes (i.e., if there is no animation loop)
-
     controls.enableDamping = true; // an animation loop is required when either damping or auto-rotation are enabled
     controls.dampingFactor = 0.25;
-
     controls.screenSpacePanning = false;
-
     controls.minDistance = 10;
     controls.maxDistance = 25;
-
-    //controls.maxPolarAngle = Math.PI / 2;
-
     controls.enablePan = false;
-
     controls.enabled = false;
     gltfStore = {};
 
-    // model
-    var newModel = 'animations/Galileo_animation_landing-page-to-overview.gltf';
-    backupScene = loadAnimation(newModel, z);
-    z++;
-    //newModel = 'models/v3.2/Galileo.gltf';
+    // modelimport
     var stableModel = 'models/v4.2/Galileo.gltf';
     newModel = 'models/v4.1/Galileo.json';
-    scene = loadModel(stableModel);   
-    //var test = jsonModel(newModel);
-    //  var objectLoader = new THREE.ObjectLoader();
-        //objectLoader.load('models/v4.1/Galileo_actual_05.json', function ( obj ) {
-        //    console.log("hey");
-        //  scene.add( obj );
-            //} );
-    //scene = jsonModel(newModel);
+    scene = loadModel(stableModel); 
 
     // lights
     var light = new THREE.DirectionalLight( 0x95ffff );
@@ -89,37 +62,14 @@ function init() {
     scene.add( light );
 
     var light = new THREE.DirectionalLight( 0x95ffff );
-    light.position.set( 1, 1, 1 );
-    backupScene.add( light );
-
-    var light = new THREE.DirectionalLight( 0x95ffff );
     light.position.set( - 1, - 1, - 1 );
     scene.add( light );
-
-    var light = new THREE.DirectionalLight( 0x95ffff );
-    light.position.set( - 1, - 1, - 1 );
-    backupScene.add( light );
-
-    var light = new THREE.AmbientLight( 0x3333 );
-    scene.add( light );
-    var light = new THREE.AmbientLight( 0x3333 );
-    backupScene.add( light );
-
-
-  //
-
     
     window.addEventListener( 'resize', onWindowResize, false );
 
     animate();
-
-    
-    //objects.transparent = true;
-
   
     sceneObject = scene;
-    console.log(sceneObject);
-    console.log(camera);
 }
 
 function showZoomtext(objname){
@@ -156,12 +106,9 @@ function showZoomtext(objname){
         document.getElementById("text14").style.display = "block";
 }
 
-//function cameraPan(posX, posY, posZ, time, [a, b, c, d, e, f, g, h, i, j, k, l, m, n, o, p, q, r]){
-//function cameraPan(posX, posY, posZ, time) {
 function cameraPan(params) {
     for(var y = 0; y < objects.length; y++){
         objects[y].material.transparent = true;
-        //objects[y].material.opacity = opa[y];
     }
     
     var to = {
@@ -216,7 +163,6 @@ function cameraPan(params) {
                 $('[id="Overview"]').tooltip('hide');
                 if(div != null)
                     div.classList.remove("special");
-                //div.className = '';
                 zoomview = true;
                 controls.minDistance = 5;
                 controls.maxDistance = 15;
@@ -226,8 +172,6 @@ function cameraPan(params) {
                 $('[id="Overview"]').tooltip('show');
                 if(div != null)
                     div.classList.add("special");
-                //if(!overview)
-                //div.className = 'hoverofcomponent';
                 controls.minDistance = 10;
                 controls.maxDistance = 25;
                 document.getElementById("zoomviewtext").style.display = "block";
@@ -242,20 +186,16 @@ function cameraPan(params) {
 
 function componentClicked(object){
     overview = false;
-    lokat = object.position;
     setOverviewButton(true);
     controls.enabled = false;
     //Show Scene with Animation
     
-    var scenemodel;
     var objname;
     if(object.parent.type == "Group") {
         object = object.parent;
         objname = object.name;
-        scenemodel = object.parent;
     } else {
         objname = object.name;
-        scenemodel = object.parent;
     }
     selectedComponent = object;
     controls.target = object.position;
@@ -263,7 +203,6 @@ function componentClicked(object){
     for(var x = 0; x<objects.length; x++){
         if(objects[x] == object || objects[x].parent == object){
             objects[x].material.transparent = false;
-            OpArray[x] = 1;
             o++;
             var g = x + 1;
             var y = 'Comp' + g;
@@ -271,11 +210,9 @@ function componentClicked(object){
             $('[id="'+y+'"]').tooltip('hide');
             if(div != null)
                 div.classList.add("special");
-            //$('[id="'+y+'"]').tooltip('toggle');
         }
         else{
             objects[x].material.transparent = true;
-            OpArray[x] = 0.2;
             o++;
             var g = x + 1;
             var y = 'Comp' + g;
@@ -362,23 +299,7 @@ function componentClicked(object){
             break;
     }
     cameraPan(params);
-    //console.log(object);
     showZoomtext(objname);
-    //$('[id="'+y+'"]').tooltip('toggle');
-    OpArray = [];
-    // lights
-    var light = new THREE.DirectionalLight( 0x95ffff );
-    light.position.set( 1, 1, 1 );
-    //scene.add( light );
-
-    var light = new THREE.DirectionalLight( 0x95ffff );
-    light.position.set( - 1, - 1, - 1 );
-    //scene.add( light );
-
-    var light = new THREE.AmbientLight( 0x3333 );
-    //scene.add( light );
-
-    
 }
 
 function setAnimation(trueorfalse){
@@ -414,27 +335,17 @@ function mouseHover (object, sidebar) {
     if (sidebar){
 
     }
-    //if(sidebar){
-    //    if(object.type == "Group"){
-    //        object = object.children[0];
-    //    }
-    //}
-    var o = 0;
     for(var x = 0; x<objects.length; x++){
         if(objects[x] == object || objects[x].parent == object){
             if(objects[x].parent.type == "Group"){
                 for (var k = 0; k< objects[x].parent.children[k].length ; k++) {
                     objects[x].parent.children[k].material.transparent = true;
                     objects[x].parent.children[k].material.opacity = 0.8
-                    //OpArray[x] = 0.8;
-                    o++;
                 }
             }
             else {
                 objects[x].material.transparent = true;
                 objects[x].material.opacity = 0.8
-                //OpArray[x] = 0.8;
-                o++;
             }
         }
         else if(objects[x] == selectedComponent || objects[x].parent == selectedComponent){
@@ -442,8 +353,6 @@ function mouseHover (object, sidebar) {
                 for (var k = 0; k< objects[x].parent.children[k].length ; k++) {
                     objects[x].parent.children[k].material.transparent = false;
                     objects[x].parent.children[k].material.opacity = 1;
-                    //OpArray[x] = 1;
-                    o++;
                 }
             }
             else {
@@ -452,11 +361,8 @@ function mouseHover (object, sidebar) {
                 var g = x + 1;
                 var y = 'Comp' + g;
                 var div = document.getElementById(y);
-                //$('[id="'+y+'"]').tooltip('show');
                 if(div != null)
                     div.classList.add("special");
-                //OpArray[x] = 1;
-                o++;
             }
         }
         else{
@@ -464,18 +370,12 @@ function mouseHover (object, sidebar) {
                 for (var k = 0; k< objects[x].parent.children[k].length ; k++) {
                     objects[x].parent.children[k].material.transparent = true;
                     objects[x].parent.children[k].material.opacity = 0.2;
-                    //OpArray[x] = 1;
-                    o++;
                 }
             }
             else {
                 objects[x].material.transparent = true;
                 objects[x].material.opacity = 0.2;
-                //OpArray[x] = 1;
-                o++;
             }
-            
-            //OpArray[x] = 0.2;
         }
     }
 }
@@ -502,7 +402,6 @@ function onDocumentMouseMove(event) {
                 $('[id="'+y+'"]').tooltip('show');
                 if(selectedComponent != objects[c])
                     div.classList.add("specialhover");
-                //$('[id="'+y+'"]').tooltip('toggle');
             }
             else{
                 var g = c + 1;
@@ -529,17 +428,12 @@ function onDocumentMouseMove(event) {
                     for (var k = 0; k< objects[x].parent.children[k].length ; k++) {
                         objects[x].parent.children[k].material.transparent = false;
                         objects[x].parent.children[k].material.opacity = 1;
-                        //OpArray[x] = 1;
-                        console.log("TESTESTESTET");
-                        o++;
                         c = x+1;
                     }
                 }
                 else {
                     objects[x].material.transparent = false;
                     objects[x].material.opacity = 1;
-                    //OpArray[x] = 1;
-                    o++;
                     c = x+1;
                     var y = 'Comp' + c;
                     $('[id="'+y+'"]').tooltip('hide');
@@ -549,8 +443,6 @@ function onDocumentMouseMove(event) {
             else{
                 objects[x].material.transparent = true;
                 objects[x].material.opacity = opashouldby;
-                //OpArray[x] = 0.5;
-                o++;
                 c = x+1;
                 var y = 'Comp' + c;
                 $('[id="'+y+'"]').tooltip('hide');
@@ -572,55 +464,10 @@ function pauseControls(document) {
   document.removeEventListener('mousemove', onDocumentMouseMove, false);
 }
 
-function loadAnimation(modelname, z){
-  var newScene = new THREE.Scene();
-  clock = new THREE.Clock();
-  //scene.background = new THREE.TextureLoader().load( "images/spacebackground_temp.jpg" );
-  newScene.fog = new THREE.FogExp2( 0xcccccc, 0.002 );
-  
-  // model
-  var loader = new THREE.GLTFLoader();
-  loader.load( modelname, function ( gltf ) { //UPLOAD MODEL HERE
-  gltf.scene.traverse( function ( child ) {
-    //if ( child.isMesh ) {
-      newScene.add( gltf.scene );
-      gltfStore.animations =  gltf.animations;
-      gltfStore.ship = gltf.scene.children[2];
-      gltfStore.cam =  gltf.cameras[0];
-
-      gltfStore.mixer = new THREE.AnimationMixer(gltf.scene);
-      
-      gltfStore.mixer.clipAction(gltfStore.animations[0]).clampWhenFinished  = true;
-      gltfStore.mixer.clipAction(gltfStore.animations[0]).setLoop(THREE.LoopOnce, 0);
-      gltfStore.mixer.clipAction(gltfStore.animations[0]).play();
-
-      gltfStore.mixer.addEventListener('finished',function(e){
-          setAnimation(false);
-          var item =document.getElementById("hoverbuttons")
-          item.className = 'unhidden';
-          var item =document.getElementById("HelpButton")
-          item.className = 'unhidden';
-          //saveCamera = newScene.children[3].children[1];
-          //scene.children[3].children[0] = saveCamera;
-          overviewhasbeen = true;
-          //gltfStore.mixer = null;
-      });
-     
-  } );
-
-  }, undefined, function ( e ) {
-
-    console.error( e );
-
-  } );
-  return newScene;
-}
-
 function loadModel(modelname) {
 
   var newScene = new THREE.Scene();
   clock = new THREE.Clock();
-  //scene.background = new THREE.TextureLoader().load( "images/spacebackground_temp.jpg" );
   newScene.fog = new THREE.FogExp2( 0xcccccc, 0.002 );
   
   // model
@@ -643,37 +490,6 @@ function loadModel(modelname) {
   return newScene
 }
 
-function jsonModel(modelname) {
-    var loader = new THREE.ObjectLoader();
-
-    var newScene = new THREE.Scene();
-    clock = new THREE.Clock();
-    //scene.background = new THREE.TextureLoader().load( "images/spacebackground_temp.jpg" );
-    //newScene.fog = new THREE.FogExp2( 0xcccccc, 0.002 );
-    loader.load(
-        // resource URL
-        'models/v4.1/Galileo.json',
-
-        // onLoad callback
-        // Here the loaded data is assumed to be an object
-        function ( obj ) {
-            // Add the loaded object to the scene
-            scene.add( obj );
-        },
-
-        // onProgress callback
-        function ( xhr ) {
-            console.log( (xhr.loaded / xhr.total * 100) + '% loaded' );
-        },
-
-        // onError callback
-        function ( err ) {
-            console.error( 'An error happened' );
-        }
-    );
-    return newScene;
-}
-
 function onWindowResize() {
 
   camera.aspect = window.innerWidth / window.innerHeight;
@@ -682,11 +498,8 @@ function onWindowResize() {
   renderer.setSize( window.innerWidth, window.innerHeight );
 
 }
-//controls.autoRotate = true;
 
 function animate() {
-
-    //if (overviewhasbeen)
     TWEEN.update();
 
     requestAnimationFrame( animate );
@@ -700,19 +513,5 @@ function render() {
     renderer.render( scene, camera );
 }
 
-for (item in objects){
-  item.callback = function() { console.log( this.name ); }
-  mesh.callback = function() { console.log( this.name ); }
-  //child.callback = function() { console.log( this.name ); }
-
-}
-
-
-
-
-
-
-
-
-//AT START OF PROGRAM
+//THIS IS PROGRAM START
 init();

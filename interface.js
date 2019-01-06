@@ -6,7 +6,7 @@ function hoverOverviewButton(trueorfalse, buttonobject){
         buttonobject.src = 'images/Close-Icon-Word.png';
         var div = document.getElementById("Overview");
         $('[id="Overview"]').tooltip('show');
-        if(div != null)
+        if(div != null)o
             div.classList.add("special");
     }
     else{
@@ -20,10 +20,6 @@ function hoverOverviewButton(trueorfalse, buttonobject){
 }
 
 function goToOverview(){
-    var o = 0;
-    //for (var i = 0; i < sceneObject.children[3].children.length; i++) {
-        //console.log(sceneObject.children[3].children[i].name);
-    //}
     if (zoomview){
         controls.enabled = false;
         selectedComponent = null;
@@ -32,26 +28,12 @@ function goToOverview(){
             if(scene.children[i].type == "Scene")
                 scenemodel = scene.children[i];
         }
-        //controls.target = scenemodel.position;  
-        //camera.lookAt(scenemodel.position);
         for (var i = 0; i< scenemodel.children.length ; i++) {
             if(scenemodel.children[i].name != "Camera"){
-                if(scenemodel.children[i].type == "Group"){
-                    for (var k = 0; k< scenemodel.children[i].children.length ; k++) {
-                        //scenemodel.children[i].children[k].material.transparent = true;
-                        OpArray[o + k] = 0.9;
-                        o++;
-                    }
-                }
-                else {
-                    //scenemodel.children[i].material.transparent = true;
-                    OpArray[o] = 0.9;
-                    o++;
-                    var y = 'Comp' + i;
-                    var div = document.getElementById(y);
-                    $('[id="'+y+'"]').tooltip('hide');
-                    div.classList.remove("special");
-                }
+                var y = 'Comp' + i;
+                var div = document.getElementById(y);
+                $('[id="'+y+'"]').tooltip('hide');
+                div.classList.remove("special");
             }
         }
         setOverviewButton(false);
@@ -64,7 +46,6 @@ function goToOverview(){
             document.getElementById("text" + k).style.display = "none";
         var params = [posOverview[0], posOverview[1], posOverview[2], 2000]
         cameraPan(params);
-        OpArray = [];
     }
     else if(overview){
         var div = document.getElementById('Overview');
@@ -92,8 +73,6 @@ function setOverviewButton(trueorfalse){
 
 function goToComp(i){
     var item = document.getElementById("Comp" + i);
-    //$("Comp" + 1).tooltip('show');
-    //item.className='active';
     var object;
     for (var k = 0; k< scene.children.length; k++){
         if(scene.children[k].type == "Scene")
@@ -119,18 +98,10 @@ function LandingToOverview(clickedButton, divID, divID2) {
     //Show Scene with Animation
     landing = false;
     overview = true;
-    for (var y = 0; y < objects.length; y++)
-        OpArray[y] = objects[y].material.opacity;
     var params = [posOverview[0], posOverview[1], posOverview[2], 2000];
-    //cameraPan(posOverview[0], posOverview[1], posOverview[2], 4000);
     cameraPan(params);
-    OpArray = [];
-    //activating controls reactivated from animation loader
-    
-    //var item =document.getElementById("mySidenav")
-    //item.className = 'unhidden';
-
 }
+//activating controls reactivated from animation loader
 
 function landingpageText(divID){
     if(divID == "starttext1"){
@@ -162,12 +133,6 @@ function ToggleHelp(divID) {
                 div.classList.remove("special");
         }
     }
-    //makes model invisible, not the background
-    //sceneObject.visible = !sceneObject.visible;
-    
-    console.log(camera);
-    console.log(camera.position.x+", "+camera.position.y+", "+camera.position.z);
-    console.log(camera.rotation._x+", "+camera.rotation._y+", "+camera.rotation._z);
     if (paused == 0) {
         pauseControls(document);
         paused = 1;
