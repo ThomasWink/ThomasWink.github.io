@@ -7,6 +7,7 @@ Welcome to the Galileo Experience
 1. Introduction
 2. Boot to localhost
 3. Customization
+4. Look online
 
 
 1. Introduction
@@ -31,3 +32,6 @@ To used this with your own model, do the following:
     -in index.html, change the landingpage text
     -in style.css, add #text as you need them for the zoomviewtexts
     -upload the icons that you want and search in the files for where to replace them
+
+4. Run online
+This visualization can be seen online at https://thomaswink.github.io
