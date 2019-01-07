@@ -153,7 +153,10 @@ function cameraPan(params) {
             tooltiptinit();
             var item =document.getElementById("HelpButton")
             item.className = 'unhidden';
-            var item =document.getElementById("simple-icons")
+            var item =document.getElementById("simple-icon1")
+            item.className = 'unhidden';
+            item.style.display = "block";
+            var item =document.getElementById("simple-icon2")
             item.className = 'unhidden';
             item.style.display = "block";
             if(!overview) {

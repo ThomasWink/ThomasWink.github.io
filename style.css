@@ -139,12 +139,22 @@ html, body {
   z-index: 500;
 }
 
-#simple-icons {
+#simple-icon1 {
   display: none;
   position: absolute;
   bottom: 0px;
-  left: 80px;
-  width: 250px;
+  left: 100px;
+  width: 80px;
+  height: 80px;
+  z-index: 500;
+}
+
+#simple-icon2 {
+  display: none;
+  position: absolute;
+  bottom: 0px;
+  left: 180px;
+  width: 80px;
   height: 80px;
   z-index: 500;
 }
@@ -235,10 +245,22 @@ html, body {
   bottom: 30px;
 }
 
-#helpimage1, #helpimage2 {
+#helpimage1 {
   position: relative; 
   height: 50px;
-  margin: auto 0px 30px 30px;
+  margin: auto 0px 0px 2px;
+}
+
+#helpimage2 {
+  position: relative; 
+  height: 50px;
+  margin: auto 0px 0px 15px;
+}
+
+#smalltext {
+  color:  #333;
+  font-size: 10px;
+  margin: 5px 0px 0px 0px;
 }
 
 #closeimage{
