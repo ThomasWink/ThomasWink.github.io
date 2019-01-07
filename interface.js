@@ -19,6 +19,13 @@ function hoverOverviewButton(trueorfalse, buttonobject){
     }
 }
 
+function hoverHelpButton(trueorfalse, buttonobject){
+    if(trueorfalse)
+        buttonobject.src = 'images/EXPLAIN-GALILEO2.png';
+    else
+        buttonobject.src = 'images/Explain-Galileo.png';
+}
+
 //called when going from zoomview to overview, controls tooltips, zoomtext and animation endposition
 function goToOverview(){
     if (zoomview){
