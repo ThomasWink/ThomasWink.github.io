@@ -26,7 +26,7 @@ var zoomview = false;
 
 function init() {
     posLandingPage = [0, 18, 3];
-    posOverview = [10, 3, 10];
+    posOverview = [9, 2.5, 9];
     raycaster = new THREE.Raycaster();
     scene = new THREE.Scene();
     clock = new THREE.Clock();
